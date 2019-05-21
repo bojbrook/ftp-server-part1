@@ -1,0 +1,13 @@
+Bowen Brooks
+myclient.c: code for client side
+myserver.c: code for server side
+working_test.sh: Seperate script for starting files manually compares the output of the two files.
+
+To run the test the file that you want transferred in the root folder. The test will run and print out if there are any differences between the 2 files. The client file will appear in the src folder.
+
+The client side involves multiple threads that are created based on the available servers.  When the client starts up it deletes the output file if it exists. It tries to connect to a server and if it gets no response it will skip to the next one. The client downloads the number of chunks specified. If the chunks are bigger than the number of servers then some of the servers are access twice.
+
+The server side waits for a connection from the client and responds with the files name. After that it opens new threads to handle each client connection. It sends the file chunk then waits for the ack to be sent back.
+
+My program has problems handling very large files. I also couldn't test a server failing in the middle. Once a client identifies a server it just assumes it will always be running.
+
